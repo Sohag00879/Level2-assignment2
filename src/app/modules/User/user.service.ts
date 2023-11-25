@@ -1,6 +1,7 @@
 import { TOrder, TUser } from './user.interface';
 import { UserModel } from './user.model';
 
+//create user service
 const createUserIntoDB = async (user: TUser) => {
   if (await UserModel.isUserExists(user.userId)) {
     throw new Error('User already exists!');
@@ -10,6 +11,7 @@ const createUserIntoDB = async (user: TUser) => {
   return result;
 };
 
+//get all user service
 const getAllUserFromDb = async () => {
   const result = await UserModel.aggregate([
     {
@@ -31,7 +33,7 @@ const getAllUserFromDb = async () => {
 };
 
 
-
+// get single user service
 const getSingleUserFromDb = async (userId: number) => {
   const existingUser = await UserModel.isUserExists(userId);
   if (!existingUser) {
