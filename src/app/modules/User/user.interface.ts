@@ -30,8 +30,6 @@ export type TUser = {
   isDeleted:boolean;
   orders?:TOrder[];
 }
-// 
-
 
 export interface userModel extends Model<TUser> {
   isUserExists(userId: number): Promise<TUser | null>;
