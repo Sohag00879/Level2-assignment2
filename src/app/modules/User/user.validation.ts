@@ -30,25 +30,30 @@ const addressValidationSchema = z.object({
     required_error: "Country is required",
     invalid_type_error: "Country must be a string",
   }).trim(),
-  
+
 });
 
 const orderValidationSchema = z.object({
+
   productName: z.string({
     required_error: "Product Name is required",
     invalid_type_error: "Invalid Product Name,  must be in string",
   }).trim().min(1).max(255),
+
   price: z.number({
     required_error: "Price is required",
     invalid_type_error: "Invalid price,  must be in number",
   }).positive({message:"Price can't be negative"}),
+
   quantity: z.number({
     required_error: "Quantity is required",
     invalid_type_error: "Invalid quantity,  must be in number",
   }).positive({message:"Quantity can't be negative, must be postive"}),
+
 });
 
 const userValidationSchema = z.object({
+  
   userId: z.number({
     required_error: "User Id is required",
     invalid_type_error: "User Id is invalid, must be in number",
