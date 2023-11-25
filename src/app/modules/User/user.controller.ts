@@ -257,7 +257,7 @@ const calculateTotalPrice = async (req: Request, res: Response) => {
         totalPrice = totalPrice + price;
         totalPrice.toFixed(2);
       }
-      
+
     }
 
     res.status(200).json({
@@ -278,7 +278,6 @@ const calculateTotalPrice = async (req: Request, res: Response) => {
     });
   }
 };
-
 
 
 export const userControllers = {

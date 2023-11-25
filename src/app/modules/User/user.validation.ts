@@ -1,29 +1,36 @@
 import { z } from "zod";
 
 const userNameValidationSchema = z.object({
+
   firstName: z.string({
     required_error: "First name is required",
     invalid_type_error: "First name must be a string",
   }).max(20, { message: "First name can't be more than 20 characters long" }).trim(),
+
   lastName: z.string({
     required_error: "Last name is required",
     invalid_type_error: "Last name must be a string",
   }).max(20, { message: "Last name can't be  more than 20 characters long" }).trim(),
+
 });
 
 
 const addressValidationSchema = z.object({
+
   street: z.string({
     required_error: "Street is required",
   }).trim(),
+
   city: z.string({
     required_error: "City is required",
     invalid_type_error: "City must be a string",
   }).trim(),
+
   country: z.string({
     required_error: "Country is required",
     invalid_type_error: "Country must be a string",
   }).trim(),
+  
 });
 
 const orderValidationSchema = z.object({
