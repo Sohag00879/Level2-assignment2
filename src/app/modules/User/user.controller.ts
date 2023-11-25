@@ -90,14 +90,14 @@ const getSingleUser = async (req: Request, res: Response) => {
       error: {
         code: 404,
         description: error.message,
-        
+
       },
     });
   }
 };
 
 
-
+//update a user
 const updateUser = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId);
@@ -125,6 +125,7 @@ const updateUser = async (req: Request, res: Response) => {
       data: updatedUser,
     });
   } catch (error: any) {
+
     if (error.issues && error.message) {
       res.status(500).json({
         success: false,
@@ -132,12 +133,14 @@ const updateUser = async (req: Request, res: Response) => {
         error: error.issues[0].message,
       });
     } else {
+
       res.status(500).json({
         success: false,
         message: error.message || 'User not found',
         error: {
           code: 404,
           description: error.message,
+
         },
       });
     }
@@ -145,7 +148,7 @@ const updateUser = async (req: Request, res: Response) => {
 };
 
 
-
+//delete user
 const deleteUser = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId);
@@ -157,6 +160,7 @@ const deleteUser = async (req: Request, res: Response) => {
       data: null,
     });
   } catch (error: any) {
+
     res.status(500).json({
       success: false,
       message: 'User not found',
@@ -164,11 +168,13 @@ const deleteUser = async (req: Request, res: Response) => {
         code: 404,
         description: error.message,
       },
+
     });
   }
 };
 
 
+//order a prodcut
 
 const orderProdcuct = async (req: Request, res: Response) => {
   try {
@@ -203,6 +209,7 @@ const orderProdcuct = async (req: Request, res: Response) => {
 };
 
 
+//get All orders
 const getAllOrders = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId);
@@ -233,20 +240,24 @@ const getAllOrders = async (req: Request, res: Response) => {
 };
 
 
-
+//calculate total price
 const calculateTotalPrice = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId);
+
     const orders:any = await userServices.calculateTotalPriceFromOrders(userId);
     const multiplyPriceQuantity: number[] | undefined = orders?.orders.map(
       (order:any) => order.price * order.quantity,
     );
+
     let totalPrice: number = 0;
     if (multiplyPriceQuantity) {
+
       for (const price of multiplyPriceQuantity) {
         totalPrice = totalPrice + price;
         totalPrice.toFixed(2);
       }
+      
     }
 
     res.status(200).json({
