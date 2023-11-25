@@ -6,6 +6,7 @@ import { validation } from './user.validation';
 
 //create a user
 const createUser = async (req: Request, res: Response) => {
+
   try {
     const user = req.body;
 
@@ -27,7 +28,9 @@ const createUser = async (req: Request, res: Response) => {
       message: 'User created successfully!',
       data: result,
     });
+
   } catch (error: any) {
+
     if (error.issues && error.message) {
       res.status(500).json({
         success: false,
@@ -35,15 +38,18 @@ const createUser = async (req: Request, res: Response) => {
         error: error.issues[0].message,
       });
     } else {
+
       res.status(500).json({
         success: false,
         message: error.message || 'Something went wrong',
+
       });
     }
   }
 };
 
 
+//get all users
 const getAllUsers = async (req: Request, res: Response) => {
   try {
     const result = await userServices.getAllUserFromDb();
@@ -54,16 +60,18 @@ const getAllUsers = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: any) {
+
     res.status(500).json({
       success: false,
       message: error.message || 'something went wrong',
       error: error,
+
     });
   }
 };
 
 
-
+// get single user
 const getSingleUser = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId);
@@ -75,12 +83,14 @@ const getSingleUser = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: any) {
+
     res.status(500).json({
       success: false,
       message: 'User not Found',
       error: {
         code: 404,
         description: error.message,
+        
       },
     });
   }
