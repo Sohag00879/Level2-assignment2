@@ -48,8 +48,9 @@ const getSingleUserFromDb = async (userId: number) => {
 };
 
 
-
+// update user service
 const updateUserIntoDb = async (userId: number, data: TUser) => {
+
   const existingUser = await UserModel.isUserExists(userId);
   if (!existingUser) {
     throw new Error('User not found!');
@@ -59,8 +60,9 @@ const updateUserIntoDb = async (userId: number, data: TUser) => {
 };
 
 
-
+//delete user service
 const deleteUserFromDb = async (userId: number) => {
+
   const existingUser = await UserModel.isUserExists(userId);
   if (!existingUser) {
     throw new Error('User not found!');
@@ -71,8 +73,9 @@ const deleteUserFromDb = async (userId: number) => {
 };
 
 
-
+//order product service
 const orderProductByUser = async (userId: number, newOrder: TOrder) => {
+
   const existingUser = await UserModel.isUserExists(userId);
   if (!existingUser) {
     throw new Error('User not found!');
@@ -86,8 +89,9 @@ const orderProductByUser = async (userId: number, newOrder: TOrder) => {
 };
 
 
-
+//get all order service
 const getAllOrdersFromUser = async (userId: number) => {
+  
   const existingUser = await UserModel.isUserExists(userId);
   if (!existingUser) {
     throw new Error('User not found!');
@@ -98,12 +102,13 @@ const getAllOrdersFromUser = async (userId: number) => {
 };
 
 
-
+//calculate total price service
 const calculateTotalPriceFromOrders = async (userId: number) => {
   const existingUser = await UserModel.isUserExists(userId);
   if (!existingUser) {
     throw new Error('User not found!');
   }
+
   const result = await UserModel.findOne({ userId }, { orders: 1, _id: 0 });
   return result;
 };
